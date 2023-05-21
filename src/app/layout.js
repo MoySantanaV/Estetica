@@ -1,8 +1,9 @@
 import './globals.css'
-import { Space_Grotesk } from 'next/font/google'
+import { Poppins } from 'next/font/google'
 
-const spaceGrotesk = Space_Grotesk({
-  subsets: ['latin']
+const poppins = Poppins({
+  subsets: ['latin'],
+  weight: ['400', '700']
 })
 
 export const metadata = {
@@ -13,7 +14,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="es">
-      <body className={spaceGrotesk.className}>{children}</body>
+      <body className={poppins.className}>{children}</body>
     </html>
   )
 }
