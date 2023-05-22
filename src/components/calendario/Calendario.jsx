@@ -1,68 +1,95 @@
-
+"use client";
+import { useState } from "react";
 import style from "../calendario/Calendario.module.css";
-import { HiOutlineChevronLeft, HiOutlineChevronRight } from 'react-icons/hi';
+import { HiOutlineChevronLeft, HiOutlineChevronRight } from "react-icons/hi";
 
+const months = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+const daysOfWeek = ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab']
 
 export default function Calendario() {
+  let date = new Date();
+  const [currYear, setCurrYear] = useState(date.getFullYear());
+  const [currMonth, setCurrMonth] = useState(date.getMonth());
+
+
+  let firstDayOfMonth = new Date(currYear, currMonth, 1).getDay(),
+    lastDayOfCurrentMonth = new Date(currYear, currMonth + 1, 0).getDate(),
+    firstDaysOfNextMonth = new Date(currYear, currMonth, lastDayOfCurrentMonth).getDay(),
+    lastDaysOfprevMonth = new Date(currYear, currMonth, 0).getDate();
+
+  const handleLastDays = () => {
+    const lastDays = [];
+    for (let i = firstDayOfMonth; i > 0; i--) {
+      lastDays.push(
+        <li key={i} className={style.inactive}>
+          {lastDaysOfprevMonth - i + 1}
+        </li>
+      );
+    }
+    return lastDays;
+  };
+
+  const handleDays = () => {
+    const days = [];
+    for (let i = 1; i <= lastDayOfCurrentMonth; i++) {
+      let isToday = i === date.getDate() && currMonth === new Date().getMonth() && currYear === new Date().getFullYear() ? `${style.active}` : "";
+      days.push(<li key={i} className={isToday}> {i} </li>);
+
+    }
+    return days;
+  };
+
+  const handleFirstDaysOfNextMonth = () => {
+    const firstDays = [];
+    for (let i = firstDaysOfNextMonth; i < 6; i++) {
+      firstDays.push(<li key={i} className={style.inactive}> {i - firstDaysOfNextMonth + 1} </li>);
+    }
+    return firstDays;
+  };
+
+  const handleMonths = (e) => {
+    const newMonth = e.target.id === "prev" ? currMonth - 1 : currMonth + 1;
+
+    if (newMonth < 0 || newMonth > 11) {
+      const newYear = newMonth < 0 ? currYear - 1 : currYear + 1;
+      setCurrYear(newYear);
+      setCurrMonth(newMonth < 0 ? 11 : 0);
+    } else {
+      setCurrMonth(newMonth);
+    }
+  };
+
   return (
+    <>
     <div className={style.calendarContainer}>
       <div className={style.calendarWrapper}>
         <div className={style.calendarHeader}>
-          <p className={style.currentDate}>Septiembre 2022</p>
+          <p
+            className={style.currentDate}
+          >{`${months[currMonth]} ${currYear}`}</p>
           <div className={style.icons}>
-            <span className={style.materialSymbolsRounded}><HiOutlineChevronLeft/></span>
-            <span className={style.materialSymbolsRounded}><HiOutlineChevronRight/></span>
+            <span className={style.materialSymbolsRounded}>
+              <HiOutlineChevronLeft onClick={handleMonths} id="prev" />
+            </span>
+            <span className={style.materialSymbolsRounded}>
+              <HiOutlineChevronRight onClick={handleMonths} />
+            </span>
           </div>
         </div>
         <div className={style.calendar}>
           <ul className={style.weeks}>
-            <li>Dom</li>
-            <li>Lun</li>
-            <li>Mar</li>
-            <li>Mie</li>
-            <li>Jue</li>
-            <li>Vie</li>
-            <li>Sab</li>
+            {daysOfWeek.map( (day, index) => (
+                <li key={index}>{day}</li>
+            ))}
           </ul>
           <ul className={style.days}>
-            <li className={style.inactive}>28</li>
-            <li className={style.inactive}>29</li>
-            <li className={style.inactive}>30</li>
-            <li className={style.inactive}>31</li>
-            <li>1</li>
-            <li>2</li>
-            <li>3</li>
-            <li>4</li>
-            <li>5</li>
-            <li>6</li>
-            <li>7</li>
-            <li>8</li>
-            <li>9</li>
-            <li>10</li>
-            <li>11</li>
-            <li>12</li>
-            <li>13</li>
-            <li>14</li>
-            <li>15</li>
-            <li>16</li>
-            <li>17</li>
-            <li>18</li>
-            <li>19</li>
-            <li>20</li>
-            <li>21</li>
-            <li className={style.active}>22</li>
-            <li>23</li>
-            <li>24</li>
-            <li>25</li>
-            <li>26</li>
-            <li>27</li>
-            <li>28</li>
-            <li>29</li>
-            <li>30</li>
-            <li className={style.inactive}>1</li>
+            {handleLastDays()}
+            {handleDays()}
+            {handleFirstDaysOfNextMonth()}
           </ul>
         </div>
       </div>
     </div>
+    </>
   );
 }
