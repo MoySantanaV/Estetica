@@ -1,0 +1,96 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+
+.card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px;
+    margin-top: 20px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    width: 330px;
+    border-radius: 10px;
+    border: 1px solid transparent;
+  }
+
+  .cardEditing {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px;
+    margin-top: 20px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    width: 330px;
+    border-radius: 10px;
+    border: 1px solid #0050d1bc;
+  }
+  
+  .customerInfo {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .customerName {
+    font-size: 16px;
+    font-weight: bold;
+  }
+  
+  .appointmentDetails {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    color: #888;
+  }
+  
+  .appointmentTime {
+    margin-right: 10px;
+  }
+  
+  .actions {
+    display: flex;
+    align-items: center;
+  }
+  
+  .editIcon {
+    margin-left: 20px;
+    font-size: 20px;
+    color: #888;
+    cursor: pointer;
+  }
+
+  .editableClientNameInput{
+    max-width: 230px;
+    font-size: 16px;
+    font-weight: 700;
+    font-family: 'Poppins';
+    border: none;
+  }
+
+  .editableClientNameInput:focus{
+outline: none;
+  }
+
+  .editableAppointmentType{
+    max-width: 140px;
+    font-size: 14px;
+    font-family: 'Poppins';
+    border: none;
+    color: #888;
+  }
+
+  .editableAppointmentType:focus{
+    outline: none;
+      }
+
+  .buttonsLayout{
+    display: flex;
+    flex-direction: row;
+
+  }
+
+  .editingButton {
+    padding: 2px;
+    font-size: 20px;
+    font-family: 'Poppins';
+    margin-left: 15px;
+background: none;
+  }
