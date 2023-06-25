@@ -15,7 +15,7 @@ export default function Appointments({ selectedDate, currYear, currMonth }) {
   console.log(appointmentData)
   const handleCardUpdate = (updatedData) => {
     const updatedAppointmentData = appointmentData.map((data) => {
-      if (data._id === updatedData._id) {
+      if (data.appointmentId === updatedData.appointmentId) {
         return {
           ...data,
           clientName: updatedData.clientName,
@@ -76,7 +76,7 @@ export default function Appointments({ selectedDate, currYear, currMonth }) {
       if (existingAppointmentData) {
         appointments.push(
           <AppointmentCard
-            key={existingAppointmentData._id}
+            key={existingAppointmentData.appointmentId}
             appointmentTimeLocal={appointmentTimeLocal}
             appointmentData={existingAppointmentData}
             handleCardUpdate={handleCardUpdate}
@@ -84,7 +84,7 @@ export default function Appointments({ selectedDate, currYear, currMonth }) {
         );
       } else {
         const newAppointmentData = {
-          _id: nanoid(5),
+          appointmentId: nanoid(5),
           time: `${hour.toString().padStart(2, '0')}:${minute.toString().padStart(2, '0')}`,
           date: appointmentDate,
           clientName: '',
@@ -93,7 +93,7 @@ export default function Appointments({ selectedDate, currYear, currMonth }) {
 
         appointments.push(
           <AppointmentCard
-            key={newAppointmentData._id}
+            key={newAppointmentData.appointmentId}
             appointmentTimeLocal={appointmentTimeLocal}
             appointmentData={newAppointmentData}
             handleCardUpdate={handleCardUpdate}
