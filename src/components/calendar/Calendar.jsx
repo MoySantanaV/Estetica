@@ -43,11 +43,11 @@ export default function Calendar() {
       const day = new Date(currYear, currMonth, i);
       const isToday = i === date.getDate() && currMonth === date.getMonth() && currYear === date.getFullYear();
       const isSelected = selectedDate && day.toDateString() === selectedDate.toDateString();
-
+  
       days.push(
         <li
           key={i}
-          className={`${isToday ? style.active : ""} ${isSelected ? style.selected : ""}`}
+          className={`${isToday ? style.active : ""} ${isSelected ? style.selected : ""} ${isSelected ? style.activeDate : ""}`}
           onClick={() => handleDayClick(day)}
         >
           {i}

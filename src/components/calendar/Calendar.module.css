@@ -103,9 +103,17 @@ transform: translate(-50%, -50%);
     color: #fff;
 }
 
+/* .days li.activeDate {
+  color: green;
+} */
+
 .days li.active::before{
     background-color: #9b59b6;
 }
+
+.days li.activeDate {
+    font-weight: bold;
+  }
 
 .appointmentsWrapper {
     margin-left: 20px;
